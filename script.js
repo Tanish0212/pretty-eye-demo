@@ -333,6 +333,7 @@ const SHOP = {
       "statusOpensToday": "مغلق الآن · يفتح اليوم الساعة {time}",
       "statusReopens": "مغلق الآن · يعيد الفتح اليوم الساعة {time}",
       "closed": "مغلق",
+      "midnight": "منتصف الليل",
       "statusOpensTomorrow": "مغلق الآن · يفتح غدًا الساعة {time}",
       "statusOpensLater": "مغلق الآن · يفتح يوم {day} الساعة {time}",
       "am": "صباحًا",
@@ -503,6 +504,7 @@ const SHOP = {
     const tx = t();
     const [h, m] = hhmm.split(":").map(Number);
     const hh = h % 24;
+    if (hh === 0 && m === 0 && tx.midnight) return tx.midnight;
     const h12 = hh % 12 === 0 ? 12 : hh % 12;
     return h12 + (m ? ":" + String(m).padStart(2, "0") : "") + " " + (hh < 12 ? tx.am : tx.pm);
   }
